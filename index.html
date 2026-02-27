@@ -31,7 +31,7 @@
       --text-muted: #6b7280;
       --text-dim: #9ca3af;
       --green: #22d3a0;
-      ---font-display: 'Satoshi', sans-serif;
+      --font-display: 'Satoshi', sans-serif;
       --font-body: 'Inter', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
     }
@@ -807,6 +807,189 @@
       color: var(--accent);
     }
 
+    /* ABOUT ME */
+    .about-bg {
+      background: var(--bg2);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      flex-shrink: 0;
+    }
+
+    .avatar-ring {
+      position: absolute;
+      inset: -6px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      background: linear-gradient(135deg, var(--accent), var(--green)) border-box;
+      -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+      mask-composite: exclude;
+      animation: rotateBorder 6s linear infinite;
+    }
+
+    @keyframes rotateBorder {
+      0% {
+        transform: rotate(0deg)
+      }
+
+      100% {
+        transform: rotate(360deg)
+      }
+    }
+
+    .avatar-inner {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent) 0%, #1a2a6c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 800;
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .avatar-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .about-right {}
+
+    .about-bio {
+      font-size: 15.5px;
+      color: var(--text-dim);
+      line-height: 1.85;
+      margin-bottom: 32px;
+    }
+
+    .about-bio p+p {
+      margin-top: 16px;
+    }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .highlight-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--text-dim);
+    }
+
+    .highlight-icon {
+      width: 34px;
+      height: 34px;
+      background: rgba(61, 127, 255, 0.1);
+      border: 1px solid rgba(61, 127, 255, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .about-interests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .interest-tag {
+      padding: 6px 14px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      transition: all 0.2s;
+    }
+
+    .interest-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .about-label {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+    }
+
+    @media(max-width:900px) {
+      .about-grid {
+        grid-template-columns: 1fr
+      }
+
+      .about-left {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center
+      }
+    }
+
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -882,7 +1065,29 @@
     <div class="hero-content fade-in" id="hero-content"></div>
   </section>
 
-  <section id="tech" style="background:var(--bg2);">
+  <section class="about-bg" id="about-me">
+    <div class="section-header fade-in">
+      <h2>About Me</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-left fade-in stagger-1">
+        <div class="avatar-wrap">
+          <div class="avatar-ring"></div>
+          <div class="avatar-inner" id="about-avatar"></div>
+        </div>
+        <div class="about-stats" id="about-stats"></div>
+      </div>
+      <div class="about-right fade-in stagger-2">
+        <div class="about-bio" id="about-bio"></div>
+        <div class="about-label">What I do</div>
+        <div class="about-highlights" id="about-highlights"></div>
+        <div class="about-label">Interests</div>
+        <div class="about-interests" id="about-interests"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tech" style="background:var(--bg);">
     <div class="section-header section-header-row fade-in" id="tech-header"></div>
     <div class="tech-grid" id="tech-grid"></div>
   </section>
@@ -986,9 +1191,9 @@
       */
       experience: [
         {
-          role: "Senior Android Developer",
-          company: "TechCorp Solutions",
-          period: "2021 – Present",
+          role: "Android Developer",
+          company: "PT. VIRTUSEE PETA SUKSES",
+          period: "Dec 2023 – Present",
           isCurrent: true,
           bullets: [
             "Led the migration of a legacy Java codebase to 100% Kotlin, reducing crash rates by 40%.",
@@ -998,8 +1203,8 @@
         },
         {
           role: "Android Developer",
-          company: "AppStudio Inc.",
-          period: "2018 – 2021",
+          company: "Viuit",
+          period: "Aug 2023 – Nov 2023",
           isCurrent: false,
           bullets: [
             "Developed and launched 5+ Android applications on the Google Play Store.",
@@ -1007,6 +1212,28 @@
             "Collaborated closely with UX/UI designers to implement pixel-perfect designs.",
           ],
         },
+        {
+          role: "Android Developer Intern",
+          company: "Berani Digital ID",
+          period: "May 2022 – Dec 2022",
+          isCurrent: false,
+          bullets: [
+            "Developed and launched 5+ Android applications on the Google Play Store.",
+            "Integrated RESTful APIs using Retrofit and handled local caching with Room.",
+            "Collaborated closely with UX/UI designers to implement pixel-perfect designs.",
+          ],
+        },
+        {
+          role: "Android Developer",
+          company: "MSIB Kampus Merdeka",
+          period: "Aug 2021 – Jan 2022",
+          isCurrent: false,
+          bullets: [
+            "Developed and launched 5+ Android applications on the Google Play Store.",
+            "Integrated RESTful APIs using Retrofit and handled local caching with Room.",
+            "Collaborated closely with UX/UI designers to implement pixel-perfect designs.",
+          ],
+        }
         // Tambah pengalaman lain di sini
       ],
 
@@ -1016,6 +1243,41 @@
         subtext: "I'm currently available for freelance projects and open to full-time opportunities. Let's discuss how I can help your team.",
         buttonLabel: "Get in Touch",
         email: "johndoe@email.com",  // ganti email kamu
+      },
+
+      /* About Me section */
+      aboutMe: {
+        // Kosongkan photoUrl jika ingin tampilkan inisial saja
+        // Isi dengan URL foto jika punya, contoh: "https://i.imgur.com/xxx.jpg"
+        photoUrl: "",
+
+        // Paragraf bio (bisa lebih dari satu)
+        bio: [
+          "Hi, my name is Febrian, an Android Developer with 3+ years of hands-on experience building modern Android applications. I'm a graduate of Game Technology student at Electronic Engineering Polytechnic Institute of Surabaya, I bring a strong technical foundation and a problem-solving mindset to every project.",
+          "Expertise in Kotlin and Jetpack Compose, focusing on clean architecture, scalable systems, and intuitive user interfaces. I’m driven by continuous improvement and passionate about building apps that are not only functional, but thoughtfully engineered."
+        ],
+
+        // Statistik yang tampil di bawah foto
+        stats: [
+          { num: "3+", label: "Years Exp." },
+          { num: "10+", label: "Apps Built" },
+          { num: "10M+", label: "Users" },
+          { num: "4.8", label: "Avg Rating" },
+        ],
+
+        // Highlight / keahlian utama
+        highlights: [
+          { icon: "📱", text: "Build native Android apps with Kotlin & Jetpack Compose" },
+          { icon: "🏗️", text: "Architect scalable apps with Clean Architecture & MVVM" },
+          { icon: "🔗", text: "Integrate REST APIs, Firebase, and third-party SDKs" },
+          { icon: "🧪", text: "Write testable code with unit & UI tests (JUnit, Espresso)" },
+        ],
+
+        // Tag minat / hobi
+        interests: [
+          "Open Source", "Android Beta", "UI/UX", "Kotlin Coroutines",
+          "Gaming", "Movie", "Coffee ☕", "Code",
+        ],
       },
 
       /* Sosial media */
@@ -1039,7 +1301,8 @@
     ${portfolioData.name} | ${portfolioData.role}
   </a>
   <ul class="nav-links">
-    <li><a href="#about">About</a></li>
+    <li><a href="#about">Home</a></li>
+    <li><a href="#about-me">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -1113,6 +1376,27 @@
     <a href="${h.ctaPrimary.href}"  class="btn btn-primary">${h.ctaPrimary.label}</a>
     <a href="${h.ctaSecondary.href}" class="btn btn-outline">${h.ctaSecondary.label}</a>
   </div>`;
+
+    // About Me
+    const am = portfolioData.aboutMe;
+    if (am.photoUrl) {
+      document.getElementById('about-avatar').innerHTML = `<img src="${am.photoUrl}" alt="${portfolioData.name}">`;
+    } else {
+      document.getElementById('about-avatar').textContent = portfolioData.initials;
+    }
+    document.getElementById('about-stats').innerHTML = am.stats.map(s => `
+  <div class="stat-card">
+    <div class="stat-num">${s.num}</div>
+    <div class="stat-label">${s.label}</div>
+  </div>`).join('');
+    document.getElementById('about-bio').innerHTML = am.bio.map(p => `<p>${p}</p>`).join('');
+    document.getElementById('about-highlights').innerHTML = am.highlights.map(hl => `
+  <div class="highlight-item">
+    <div class="highlight-icon">${hl.icon}</div>
+    <span>${hl.text}</span>
+  </div>`).join('');
+    document.getElementById('about-interests').innerHTML = am.interests.map(tag =>
+      `<span class="interest-tag">${tag}</span>`).join('');
 
     // Tech stack header
     const ts = portfolioData.techStack;
